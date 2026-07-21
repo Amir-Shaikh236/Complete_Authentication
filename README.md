@@ -24,7 +24,7 @@ DisasterWatch is a robust full-stack web application designed for real-time disa
 ### Prerequisites
 * **Node.js**: `v18.0.0` or higher
 * **npm**: `v9.0.0` or higher
-* **MongoDB**: Local instance or MongoDB Atlas Connection string
+* **MongoDB**: MongoDB Atlas Connection string
 
 ---
 
