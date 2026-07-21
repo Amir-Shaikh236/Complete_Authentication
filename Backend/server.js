@@ -30,7 +30,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 
-
 app.use(errorHandler);
 app.listen(PORT, () => console.log(`Server is Running on ${PORT}`));
 
