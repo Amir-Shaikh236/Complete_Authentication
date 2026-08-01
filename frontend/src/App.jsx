@@ -18,7 +18,6 @@ function App() {
         <Route path='/sidebar' element={<Protected> <Sidebar /> </Protected>} />
       </Routes>
 
-
     </>
   )
 }

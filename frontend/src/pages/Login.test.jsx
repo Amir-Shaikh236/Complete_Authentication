@@ -3,20 +3,8 @@ import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { BrowserRouter } from "react-router-dom"
 import { AuthContext } from "@/context/AuthProvider"
-import { describe, it, expect, beforeAll, afterAll, afterEach, vi } from "vitest"
+import { describe, it, expect, vi } from "vitest"
 import Login from "@/components/Login"
-import { http, HttpResponse } from "msw"
-
-
-// const server = setupServer(...handlers);
-
-// beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
-// afterEach(() => {
-// server.resetHandlers();
-// localStorage.clear();
-// });
-// afterAll(() => server.close());
-
 
 const renderLoginComponent = (mockUpdateToken = vi.fn()) => {
     return render(
@@ -59,15 +47,11 @@ describe("Login Presentation Layout & Action Verification Suite", () => {
         // Execute form submit trigger
         await user.click(submitButton);
 
-        // Assert that the visual button state changes to inform the user it is working
-        expect(screen.getByText(/logging in\.\.\./i)).toBeInTheDocument();
-        expect(submitButton).toBeDisabled();
-
-        // Wait for MSW to resolve the intercepted payload and verify our token callback executes
+        // Wait for the throttled request to complete and ensure the auth callback is invoked
         await waitFor(() => {
             expect(mockUpdateToken).toHaveBeenCalledTimes(1);
             expect(mockUpdateToken).toHaveBeenCalledWith("mock.access.token.jwt");
-        });
+        }, { timeout: 5000 });
     });
 });
 

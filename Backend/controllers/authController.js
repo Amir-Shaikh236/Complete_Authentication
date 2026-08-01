@@ -11,11 +11,16 @@ const register = async (req, res, next) => {
     if (userExist)
       return next(new AppError(403, "User with this email already exist"));
 
-    const user = await User.create({ firstName, lastName, email, password });
+    const user = await User.create({
+      firstName,
+      lastName,
+      email,
+      password,
+      refreshTokens: [],
+    });
 
     const { accessToken, refreshToken } = SignToken(user._id, user.role);
-    user.refreshTokens.push(refreshToken);
-    await user.save();
+    await User.updateOne({ _id: user._id }, { $push: { refreshTokens: refreshToken } }, { runValidators: false });
 
     setRefreshCookie(res, refreshToken);
     res.status(201).json({
@@ -58,9 +63,10 @@ const login = async (req, res, next) => {
 
     res.status(200).json({
       status: "success",
-      user: { id: user._id, email: user.email },
+      user: { id: user._id, email: user.email, firstName: user.firstName, lastName: user.lastName },
       accessToken,
     });
+
   } catch (error) {
     next(error);
   }

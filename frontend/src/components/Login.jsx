@@ -61,22 +61,25 @@ export default function Login() {
             password: data.password
         }
 
-        toast.promise(
-            withMinDelay(publicClient.post('/api/auth/login', payload), 2500),
-            {
-                loading: 'Logging you in...',
-                success: (response) => {
-                    const { accessToken, user } = response.data;
+        const loginPromise = withMinDelay(publicClient.post('/api/auth/login', payload), 2500);
 
-                    updateToken(accessToken);
+        toast.promise(loginPromise, {
+            loading: 'Logging you in...',
+            success: (response) => {
+                const { user } = response.data;
+                return `Logged in successfully, ${user?.firstName} ${user?.lastName}!`;
+            },
+            error: (error) => error.response?.data?.message || "Invalid credentials",
+        });
 
-                    navigate('/sidebar');
-                    return `Logged in successfully, ${user?.firstName} ${user?.lastName}!`;
-                },
-                error: (error) => error.response?.data?.message || "Invalid credentials",
-                finally: () => form.reset(),
-            }
-        );
+        const response = await loginPromise;
+        const { accessToken } = response.data;
+
+        updateToken(accessToken);
+        navigate('/sidebar');
+        form.reset();
+
+        return response;
     }
 
     return (

@@ -58,6 +58,11 @@ describe("POST /api/auth/login Security & Flow Verification..", () => {
         expect(response.body.status).toBe("success");
         expect(response.body.accessToken).toBeDefined();
         expect(typeof response.body.accessToken).toBe('string');
+        expect(response.body.user).toEqual(expect.objectContaining({
+            firstName: testUser.firstName,
+            lastName: testUser.lastName,
+            email: testUser.email,
+        }));
         expect(response.body.password).toBeUndefined(); // Prevent Password Leakage
 
         // 2. Verify Cookie Security Flags

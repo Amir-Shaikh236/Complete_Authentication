@@ -1,47 +1,288 @@
-# Complete_Authentication
+# 🔐 Complete Authentication System
 
-DisasterWatch is a robust full-stack web application designed for real-time disaster monitoring, user notification preferences, and location telemetry tracking. Built using a layered Node.js/Express REST backend and a modern React/Vite frontend.
+A **production-ready full-stack authentication system** built with **React, Node.js, Express, and MongoDB**, following modern security best practices, clean architecture principles, and comprehensive automated testing.
 
----
-
-## 🏛️ Key Architectural Features
-
-### 🛡️ Backend Engineering
-* **Modern ES Module Architecture:** Unified `import`/`export` paradigm.
-* **Security First:** Implements `Helmet` headers, `CORS` origin restrictions, `HttpOnly` + `SameSite=Strict` refresh token cookies, and password masking.
-* **Session Management & Refresh Token Rotation:** Advanced security pipeline detecting compromised token reuse to wipe hijacked sessions automatically.
-* **Isolated Testing Matrix:** Fully isolated integration test suite leveraging **Vitest**, **Supertest**, and **MongoDB Memory Server** for fast, local in-memory DB testing.
-
-### 🎨 Frontend Engineering
-* **Vite + React:** Rapid HMR build tooling and component-driven architecture.
-* **State & Form Management:** React Hook Form combined with **Zod** schema validation.
-* **UI & Styling:** Tailwind CSS primitives with accessible ARIA landmarks.
+Designed to demonstrate how authentication should be implemented in real-world applications with secure session management, refresh token rotation, protected routes, robust validation, and complete test coverage.
 
 ---
 
-## 🚀 Quickstart Guide
+# ✨ Features
 
-### Prerequisites
-* **Node.js**: `v18.0.0` or higher
-* **npm**: `v9.0.0` or higher
-* **MongoDB**: MongoDB Atlas Connection string
+## 🔐 Authentication
+
+* User Registration
+* Secure Login
+* Logout
+* Refresh Token Rotation
+* Persistent Authentication
+* Protected Routes
+* Role-ready Authentication Architecture
+* JWT Access Tokens
+* HttpOnly Refresh Token Cookies
+* Automatic Token Refresh
+* Session Expiration Handling
+* Secure Password Hashing using bcrypt
 
 ---
 
-### 1️⃣ Local Backend Setup
+# 🛡️ Security Features
+
+Security was treated as a first-class requirement throughout the application.
+
+* Refresh Token Rotation
+* Refresh Token Reuse Detection
+* Automatic Session Revocation
+* HttpOnly Cookies
+* SameSite=Strict Cookies
+* Secure Cookie Support
+* Password Hashing (bcrypt)
+* CORS Protection
+* Helmet Security Headers
+* Input Validation
+* Request Sanitization
+* Authentication Middleware
+* Protected API Endpoints
+* Secure Logout
+* Environment Variable Configuration
+* Password Masking
+* JWT Verification
+
+---
+
+# 🏗️ Architecture
+
+## Backend
+
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* ES Modules
+* REST API Architecture
+* Layered Folder Structure
+* Middleware-based Authentication
+* Centralized Error Handling
+* Environment Configuration
+* Clean Controller-Service Pattern
+
+---
+
+## Frontend
+
+* React
+* Vite
+* React Router
+* React Hook Form
+* Zod Validation
+* Axios
+* Tailwind CSS
+* shadcn/ui
+* Context API
+* Protected Routes
+* Responsive Design
+* Accessible Components
+
+---
+
+# 🧪 Testing
+
+This project includes comprehensive automated testing to ensure reliability and production readiness.
+
+## Backend Testing
+
+* Vitest
+* Supertest
+* MongoDB Memory Server
+* Integration Testing
+* Authentication Flow Testing
+* API Validation Testing
+* Database Isolation
+* Fast In-Memory Testing
+
+---
+
+## Frontend Testing
+
+* Vitest
+* React Testing Library
+* Component Testing
+* Form Validation Testing
+* Authentication Flow Testing
+* UI Rendering Tests
+* User Interaction Testing
+
+---
+
+## End-to-End Testing
+
+* Playwright
+* Complete User Authentication Flow
+* Registration
+* Login
+* Logout
+* Protected Routes
+* Token Refresh
+* Navigation Testing
+
+---
+
+# 🚀 Tech Stack
+
+| Category        | Technologies                                         |
+| --------------- | ---------------------------------------------------- |
+| Frontend        | React, Vite, Tailwind CSS, shadcn/ui                 |
+| Backend         | Node.js, Express.js                                  |
+| Database        | MongoDB, Mongoose                                    |
+| Authentication  | JWT, HttpOnly Cookies, Refresh Tokens                |
+| Validation      | React Hook Form, Zod                                 |
+| Testing         | Vitest, React Testing Library, Supertest, Playwright |
+| Package Manager | npm                                                  |
+
+---
+
+# 📂 Project Structure
+
+```text
+Complete_Authentication/
+│
+├── Frontend/
+│   ├── src/
+│   ├── public/
+│   ├── tests/
+│   └── ...
+│
+├── Backend/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   ├── utils/
+│   ├── tests/
+│   └── ...
+│
+└── README.md
+```
+
+---
+
+# ⚙️ Getting Started
+
+## Prerequisites
+
+* Node.js 18+
+* npm 9+
+* MongoDB Atlas (or local MongoDB)
+
+---
+
+## Clone the Repository
 
 ```bash
-# Navigate to Backend folder
+git clone https://github.com/your-username/Complete_Authentication.git
+
+cd Complete_Authentication
+```
+
+---
+
+# Backend Setup
+
+```bash
 cd Backend
 
-# Install dependencies
 npm install
 
-# Configure Environment Variables
 cp .env.example .env
+```
 
-# Run Integration Tests
+Configure your `.env` file.
+
+Run the backend:
+
+```bash
+npm run dev
+```
+
+Run backend tests:
+
+```bash
 npm run test
+```
 
-# Start Development Server
-npm run start
+---
+
+# Frontend Setup
+
+```bash
+cd Frontend
+
+npm install
+```
+
+Run the frontend:
+
+```bash
+npm run dev
+```
+
+Run frontend tests:
+
+```bash
+npm run test
+```
+
+Run coverage:
+
+```bash
+npm run coverage
+```
+
+---
+
+# End-to-End Tests
+
+```bash
+npm run test:e2e
+```
+
+---
+
+
+# 📈 Project Highlights
+
+* ✅ Production-ready Authentication
+* ✅ Modern React + Vite Architecture
+* ✅ Secure JWT Authentication
+* ✅ Refresh Token Rotation
+* ✅ Refresh Token Reuse Detection
+* ✅ HttpOnly Cookie Authentication
+* ✅ Complete Automated Testing
+* ✅ Responsive UI
+* ✅ Accessible Components
+* ✅ Clean Code Architecture
+* ✅ Modern Developer Experience
+
+---
+
+# 🎯 Learning Outcomes
+
+This project demonstrates practical implementation of:
+
+* Authentication & Authorization
+* Secure Session Management
+* REST API Development
+* Modern React Patterns
+* Form Validation
+* API Security
+* Automated Testing
+* End-to-End Testing
+* Component Testing
+* Integration Testing
+* Production-ready Project Structure
+
+---
+
+# 📄 License
+
+This project is intended for educational, portfolio, and demonstration purposes.
