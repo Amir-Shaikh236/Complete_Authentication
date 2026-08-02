@@ -9,28 +9,28 @@ const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.resolve(__dirname, "../Backend/.env") });
 
-export default defineConfig({
-    // Point Playwright strictly to your dedicated E2E directory
-    testDir: './e2e',
+const isCI = !!process.env.CI
+const backendDir = path.resolve(__dirname, '../Backend');
+const frontendDir = path.resolve(__dirname);
 
-    // Maximum time one test can run before timing out
+export default defineConfig({
+
+    testDir: './e2e',
     timeout: 30 * 1000,
 
     // Run assertions in parallel for maximum execution speed
     fullyParallel: true,
 
     // Fail the build on CI if you accidentally left test.only in the source code
-    forbidOnly: !!process.env.CI,
+    forbidOnly: isCI,
+
+    workers: isCI ? 1 : undefined,
+    retries: isCI ? 2 : 0,
+    reporter: isCI ? [['github'], ['html', { open: 'never' }]] : [['list']],
 
     use: {
-        // Base URL to use in actions like `await page.goto('/')`
-        // baseURL: 'http://localhost:5173',
-        baseURL: 'http://127.0.0.1:5173',
-
-        // Capture trace only when a test fails for post-mortem debugging
+        baseURL: 'http://localhost:5173',
         trace: 'on-first-retry',
-
-        // Take screenshots automatically only upon failure
         screenshot: 'only-on-failure',
     },
 
@@ -53,36 +53,26 @@ export default defineConfig({
     /* Automatically spin up your local dev servers before starting tests */
     webServer: [
         {
-            command: process.env.CI
-                ? "npm run dev -- --host 0.0.0.0"
-                : "npm run dev",
-
-            cwd: path.resolve(__dirname),
-
-            url: "http://127.0.0.1:5173",
-
-            reuseExistingServer: !process.env.CI,
-
-            timeout: 60 * 1000,
+            command: 'npm run dev',
+            cwd: frontendDir,
+            url: 'http://localhost:5173',
+            reuseExistingServer: !isCI,
+            timeout: 120 * 1000,
         },
 
         {
-            command: process.env.CI
-                ? "npm run start"
-                : "npm run dev",
-
-            cwd: path.resolve(__dirname, "../Backend"),
-
-            url: "http://127.0.0.1:5000",
-
-            reuseExistingServer: !process.env.CI,
-
-            timeout: 60 * 1000,
-
+            // Adjust this path/command if your backend sits in a separate terminal workspace
+            command: 'node server.js',
+            cwd: backendDir,
+            url: 'http://localhost:5000',
+            reuseExistingServer: !isCI,
+            timeout: 120 * 1000,
             env: {
-                NODE_ENV: "test",
-                PORT: "5000",
+                ...process.env,
+                NODE_ENV: 'test',
+                PORT: '5000',
                 MONGO_URI: process.env.MONGO_URI || "",
+                FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:5173',
             },
         },
     ],
