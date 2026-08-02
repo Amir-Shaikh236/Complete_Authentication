@@ -7,9 +7,7 @@ import User from "../../models/User.js"
 import { connectTestDB, disconnectTestDB, clearTestDB } from '../setup/db.js';
 import AppError from '../../utils/AppError.js';
 
-// =========================================================================
 // ANTI-LEAK: mock config/db instead of mutating it (ESM exports are read-only)
-// =========================================================================
 vi.mock('../../config/db.js', () => ({
     connectDB: vi.fn(async () => {
         console.log('🛡️  Test Runner: Bypassed production cloud cluster leak.');
@@ -40,8 +38,6 @@ describe("POST /api/auth/login Security & Flow Verification..", () => {
 
     beforeEach(async () => {
         await clearTestDB();
-
-        // FIX FOR BUG 1: Hydrate the document instance with an explicit array 
         // to prevent controller structural undefined array crashes during testing
         const createdUser = new User(testUser);
         createdUser.refreshTokens = [];
@@ -80,7 +76,7 @@ describe("POST /api/auth/login Security & Flow Verification..", () => {
             .expect(401);
 
         expect(response.body.status).toBe('fail');
-        expect(response.body.message).toBe("incorrect email or password");
+        expect(response.body.message).toBe("Incorrect email or password");
         expect(response.headers["set-cookie"]).toBeUndefined();
     });
 
