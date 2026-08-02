@@ -65,8 +65,12 @@ export default defineConfig({
         },
         {
             // Adjust this path/command if your backend sits in a separate terminal workspace
-            command: 'node ../Backend/server.js',
+            command: process.env.CI
+                ? 'npm run start'
+                : 'npm run dev',
+
             url: 'http://localhost:5000',
+
             reuseExistingServer: !process.env.CI,
             timeout: 60 * 1000,
             env: {
