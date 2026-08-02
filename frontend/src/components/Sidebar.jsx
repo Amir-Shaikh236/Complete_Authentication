@@ -2,10 +2,10 @@ import { useState, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
     LayoutDashboard,
-    TriangleAlert,
-    FileText,
+    UserRound,
+    Shield,
     Settings,
-    Radio,
+    ShieldCheck,
     Menu,
     X,
     LogOut,
@@ -16,9 +16,9 @@ import { privateClient } from "@/api/api";
 import { toast } from "sonner";
 
 const navItems = [
-    { label: "Dashboard", to: "/dashboard", icon: LayoutDashboard },
-    { label: "Active Alerts", to: "/alerts", icon: TriangleAlert },
-    { label: "My Reports", to: "/reports", icon: FileText },
+    { label: "Overview", to: "/dashboard", icon: LayoutDashboard },
+    { label: "Account", to: "/account", icon: UserRound },
+    { label: "Security", to: "/security", icon: Shield },
     { label: "Settings", to: "/settings", icon: Settings },
 ];
 
@@ -42,11 +42,11 @@ function NavItem({ to, icon: Icon, label, onClick }) {
                         aria-hidden="true"
                     />
                     <span className="font-medium">{label}</span>
-                    {label === "Active Alerts" && (
+                    {label === "Security" && (
                         <span
-                            className="ml-auto flex h-2 w-2 rounded-full bg-amber-400 animate-pulse"
+                            className="ml-auto flex h-2 w-2 rounded-full bg-teal-400 animate-pulse"
                             role="status"
-                            aria-label="New active alerts pending review"
+                            aria-label="Security status is active"
                         />
                     )}
                 </>
@@ -86,8 +86,8 @@ function SidebarContent({ onNavigate }) {
         <div className="flex h-full flex-col bg-slate-950">
             {/* Brand Identity */}
             <div className="flex items-center gap-2 px-4 py-6 text-teal-400">
-                <Radio className="h-5 w-5" aria-hidden="true" />
-                <span className="text-sm font-mono tracking-widest uppercase font-bold">DisasterWatch</span>
+                <ShieldCheck className="h-5 w-5" aria-hidden="true" />
+                <span className="text-sm font-mono tracking-widest uppercase font-bold">SecureAuth</span>
             </div>
 
             {/* Navigation Framework */}
@@ -118,7 +118,7 @@ function SidebarContent({ onNavigate }) {
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75" />
                         <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-teal-400" />
                     </span>
-                    Monitoring active
+                    Session ready
                 </div>
             </div>
         </div>
@@ -133,8 +133,8 @@ export default function Sidebar() {
             {/* Mobile Top App Bar Banner */}
             <div className="flex items-center justify-between border-b border-slate-800 bg-slate-950 px-4 py-3 lg:hidden">
                 <div className="flex items-center gap-2 text-teal-400">
-                    <Radio className="h-5 w-5" aria-hidden="true" />
-                    <span className="text-sm font-mono tracking-widest uppercase font-bold">DisasterWatch</span>
+                    <ShieldCheck className="h-5 w-5" aria-hidden="true" />
+                    <span className="text-sm font-mono tracking-widest uppercase font-bold">SecureAuth</span>
                 </div>
                 <button
                     onClick={() => setIsOpen(true)}

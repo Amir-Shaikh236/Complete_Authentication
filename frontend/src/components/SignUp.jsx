@@ -7,7 +7,7 @@ import { Field, FieldGroup, FieldError, FieldLabel } from "./ui/field"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./ui/card"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
-import { Loader2, Radio, Zap, MapPin, Waves, Flame, Wind, Activity } from "lucide-react"
+import { Loader2, ShieldCheck, Lock, Sparkles, UserCircle2 } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 import { useContext, useState } from "react"
 import { toast } from "sonner"
@@ -25,14 +25,6 @@ const formSchema = z.object({
         message: "Confirm password must match Password",
         path: ["confirmPassword"],
     })
-
-// Illustrative preview only — not live data
-const liveFeed = [
-    { time: "2m ago", icon: Waves, label: "Flood warning", place: "Kolhapur district" },
-    { time: "14m ago", icon: Flame, label: "Wildfire risk elevated", place: "Nashik hills" },
-    { time: "26m ago", icon: Wind, label: "Cyclone advisory", place: "Konkan coast" },
-    { time: "1h ago", icon: Activity, label: "Seismic activity detected", place: "Latur region" },
-]
 
 function ValueProp({ icon: Icon, title, desc }) {
     return (
@@ -107,42 +99,31 @@ export default function SignUp() {
             {/* Left: brand + value props + live feed */}
             <div className="lg:w-1/2 flex flex-col justify-center px-6 py-12 sm:px-10 lg:px-16 border-b lg:border-b-0 lg:border-r border-slate-800">
                 <div className="flex items-center gap-2 text-teal-400 mb-6">
-                    <Radio className="h-5 w-5" />
-                    <span className="text-sm font-mono tracking-widest uppercase">DisasterWatch</span>
+                    <ShieldCheck className="h-5 w-5" />
+                    <span className="text-sm font-mono tracking-widest uppercase">SecureAuth</span>
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl font-semibold text-slate-50 leading-tight mb-3">
-                    Know before it arrives.
+                    Create your account.
                 </h1>
                 <p className="text-slate-400 text-base sm:text-lg mb-10 max-w-md">
-                    DisasterWatch tracks floods, cyclones, earthquakes, and wildfires in real time, and sends an alert to your phone the moment your area is at risk.
+                    Start with a simple and secure auth experience that keeps your workspace protected from the very first sign-in.
                 </p>
 
                 <div className="space-y-5 mb-10">
-                    <ValueProp icon={Radio} title="Multi-hazard monitoring" desc="One system watching for floods, storms, quakes, and fires — not five different apps." />
-                    <ValueProp icon={Zap} title="Alerts in seconds" desc="Push notifications reach you the moment a threat is detected near your location." />
-                    <ValueProp icon={MapPin} title="Built for your area" desc="Set your location once; every alert is filtered to what's actually near you." />
+                    <ValueProp icon={ShieldCheck} title="Protected by design" desc="Secure sign-in flows and private account handling from day one." />
+                    <ValueProp icon={Lock} title="Fast and reliable" desc="A clean setup that helps users get started without friction." />
+                    <ValueProp icon={Sparkles} title="Ready to grow" desc="A polished foundation for any authentication-based app." />
                 </div>
 
                 <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-4">
                     <div className="flex items-center gap-2 mb-3">
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-400"></span>
-                        </span>
-                        <span className="text-xs font-mono uppercase tracking-wider text-slate-400">Live feed preview</span>
+                        <UserCircle2 className="h-4 w-4 text-teal-400" />
+                        <span className="text-xs font-mono uppercase tracking-wider text-slate-400">Account ready</span>
                     </div>
-                    <ul className="space-y-3">
-                        {liveFeed.map((item, i) => (
-                            <li key={i} className="flex items-start gap-3 text-sm">
-                                <item.icon className="h-4 w-4 text-amber-400 mt-0.5 shrink-0" />
-                                <p className="flex-1 min-w-0 text-slate-200 truncate">
-                                    {item.label} <span className="text-slate-500">— {item.place}</span>
-                                </p>
-                                <span className="font-mono text-xs text-slate-500 shrink-0">{item.time}</span>
-                            </li>
-                        ))}
-                    </ul>
+                    <p className="text-sm text-slate-300">
+                        Your profile, access, and session are all managed through one clear experience.
+                    </p>
                 </div>
             </div>
 
@@ -151,7 +132,7 @@ export default function SignUp() {
                 <Card className="w-full max-w-lg bg-slate-900/60 border-slate-800 backdrop-blur space-y-6">
                     <CardHeader className="flex items-center justify-center flex-col mt-4">
                         <CardTitle className="text-2xl font-semibold text-slate-50">Create your account</CardTitle>
-                        <CardDescription className="text-slate-400">Start receiving alerts for your area</CardDescription>
+                        <CardDescription className="text-slate-400">Set up your access in just a few steps</CardDescription>
                     </CardHeader>
                     <CardContent className="px-5 sm:px-6">
 
@@ -217,7 +198,7 @@ export default function SignUp() {
                     <CardFooter className="flex flex-col w-full border-t border-slate-800/60 pt-4 bg-transparent">
                         <p className="text-center text-sm text-slate-500">
                             Already have an account?{" "}
-                            <Link to="/" className="text-teal-400 cursor-pointer hover:underline"> Login </Link>
+                            <Link to="/" className="text-teal-400 cursor-pointer hover:underline"> Sign in </Link>
                         </p>
                     </CardFooter>
                 </Card>

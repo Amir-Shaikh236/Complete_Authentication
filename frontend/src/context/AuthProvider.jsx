@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
         tokenRef.current = token;
         setAccessToken(token);
         setIsAuthenticated(!!token);
-        if (token) localStorage.setItem('DisasterWatch_hint', 'true');
+        if (token) localStorage.setItem('SecureAuth_hint', 'true');
 
     }, []);
 
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
         tokenRef.current = null;
         setAccessToken(null);
         setIsAuthenticated(false);
-        localStorage.removeItem('DisasterWatch_hint');
+        localStorage.removeItem('SecureAuth_hint');
     }, []);
 
     useEffect(() => {
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const initializeSession = async () => {
-            const hasSessionHint = localStorage.getItem('DisasterWatch_hint') === 'true';
+            const hasSessionHint = localStorage.getItem('SecureAuth_hint') === 'true';
             if (!hasSessionHint) {
                 setIsInitializing(false)
                 return;
