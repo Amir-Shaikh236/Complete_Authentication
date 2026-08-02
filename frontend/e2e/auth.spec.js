@@ -45,7 +45,7 @@ test.describe('End-To-End EnterPrise Authentication Gateway', () => {
         // Locate elements purely via user-facing accessible labels, never fragile CSS selectors
         const emailInput = page.getByLabel(/email/i);
         const passwordInput = page.getByLabel(/password/i);
-        const submitBtn = page.getByRole('button', { name: 'Login', exact: true });
+        const submitBtn = page.getByRole('button', { name: /sign in/i, exact: true });
 
         // Type credentials and submit through the real browser loop
         await emailInput.fill('wrong.user@disasterWatch.io');
@@ -69,13 +69,13 @@ test.describe('End-To-End EnterPrise Authentication Gateway', () => {
         await page.getByLabel(/password/i).fill('SecurePassword123!');
 
         // press button
-        await page.getByRole('button', { name: 'Login', exact: true }).click();
+        await page.getByRole('button', { name: /sign in/i, exact: true }).click();
 
         // Assert the app automatically re-routes the user to the protected dashboard page
         await expect(page).toHaveURL(/\/sidebar$/);
 
-        await expect(page.locator('aside').getByText(/DisasterWatch/i).first()).toBeVisible();
-        await expect(page.getByRole('link', { name: 'Dashboard' })).toBeVisible();
+        await expect(page.locator('aside').getByText(/SecureAuth/i).first()).toBeVisible();
+        await expect(page.getByRole('link', { name: 'Overview' })).toBeVisible();
 
         const activeCookies = await page.evaluate(() => document.cookie);
         expect(activeCookies).not.toContain('refreshToken=');

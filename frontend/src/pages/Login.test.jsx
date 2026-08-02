@@ -22,12 +22,12 @@ describe("Login Presentation Layout & Action Verification Suite", () => {
         renderLoginComponent();
 
         // 1. Assert semantic heading text exists in the document flow
-        expect(screen.getByRole("heading", { name: /log in/i })).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: /sign in to your workspace/i })).toBeInTheDocument();
 
         // 2. Confirm fields are accessible via standard input labels
         expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
-        expect(screen.getByRole("button", { name: /login/i })).toBeInTheDocument();
+        expect(screen.getByRole("button", { name: /sign in/i })).toBeInTheDocument();
     });
 
     it("should process valid user credentials smoothly and trigger the state context method", async () => {
@@ -38,7 +38,7 @@ describe("Login Presentation Layout & Action Verification Suite", () => {
 
         const emailInput = screen.getByLabelText(/email/i);
         const passwordInput = screen.getByLabelText(/password/i);
-        const submitButton = screen.getByRole("button", { name: /login/i });
+        const submitButton = screen.getByRole("button", { name: /sign in/i });
 
         // Simulate a real user typing credentials into the form inputs
         await user.type(emailInput, "amir.shaikh@disasterwatch.io");

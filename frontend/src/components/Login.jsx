@@ -6,7 +6,7 @@ import { Field, FieldGroup, FieldError, FieldLabel } from "./ui/field";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./ui/card";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { Loader2, Radio, ShieldCheck, BellRing } from "lucide-react";
+import { Loader2, ShieldCheck, Lock, Sparkles } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "@/context/AuthProvider";
 import { toast } from "sonner";
@@ -88,20 +88,20 @@ export default function Login() {
             {/* Left: brand + reassurance */}
             <div className="lg:w-1/2 flex flex-col justify-center px-6 py-12 sm:px-10 lg:px-16 border-b lg:border-b-0 lg:border-r border-slate-800">
                 <div className="flex items-center gap-2 text-teal-400 mb-6">
-                    <Radio className="h-5 w-5" />
-                    <span className="text-sm font-mono tracking-widest uppercase">DisasterWatch</span>
+                    <ShieldCheck className="h-5 w-5" />
+                    <span className="text-sm font-mono tracking-widest uppercase">SecureAuth</span>
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl font-semibold text-slate-50 leading-tight mb-3">
-                    Welcome back.
+                    Sign in to your workspace.
                 </h1>
                 <p className="text-slate-400 text-base sm:text-lg mb-10 max-w-md">
-                    Your alerts, your location, your history — all exactly where you left them. Sign in to keep monitoring.
+                    Access your account securely and continue where you left off with a simple, protected experience.
                 </p>
 
                 <div className="space-y-5">
-                    <StatusItem icon={BellRing} text="Your alert preferences stay saved between sessions." />
-                    <StatusItem icon={ShieldCheck} text="Your account and location data stay private to you." />
+                    <StatusItem icon={Lock} text="Your credentials stay protected with every sign-in." />
+                    <StatusItem icon={Sparkles} text="A clean and focused experience for your authentication flow." />
                 </div>
             </div>
 
@@ -109,8 +109,8 @@ export default function Login() {
             <div className="lg:w-1/2 flex items-center justify-center px-4 py-12 sm:px-6">
                 <Card className="w-full max-w-md bg-slate-900/60 border-slate-800 backdrop-blur space-y-6">
                     <CardHeader className="flex justify-center items-center flex-col mt-3">
-                        <CardTitle as="h2" className="text-2xl font-semibold text-slate-50"> Log in </CardTitle>
-                        <CardDescription className="text-slate-400"> Welcome back! Please sign in to your account. </CardDescription>
+                        <CardTitle as="h2" className="text-2xl font-semibold text-slate-50"> Sign in </CardTitle>
+                        <CardDescription className="text-slate-400"> Welcome back! Please sign in to continue. </CardDescription>
                     </CardHeader>
                     <CardContent className="px-5 sm:px-6">
                         <form onSubmit={form.handleSubmit(onsubmit)} className="space-y-4">
@@ -139,14 +139,14 @@ export default function Login() {
                             >
                                 {isSubmitting && (
                                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                )} {isSubmitting ? 'Logging in...' : 'Login'}
+                                )} {isSubmitting ? 'Signing in...' : 'Sign in'}
                             </Button>
                         </form>
                     </CardContent>
                     <CardFooter className="flex flex-col w-full border-t border-slate-800/60 pt-4 bg-transparent">
                         <p className="text-center text-sm text-slate-400">
                             Don't have an account?{" "}
-                            <Link to="/register" className="text-teal-400 cursor-pointer hover:underline">Register</Link>
+                            <Link to="/register" className="text-teal-400 cursor-pointer hover:underline">Create account</Link>
                         </p>
                     </CardFooter>
                 </Card>

@@ -7,7 +7,7 @@ import dotenv from 'dotenv'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: path.resolve(__dirname, "../Backend/.env") });
+dotenv.config({ path: path.resolve(__dirname, "../backend/.env") });
 
 export default defineConfig({
     // Point Playwright strictly to your dedicated E2E directory
@@ -24,7 +24,8 @@ export default defineConfig({
 
     use: {
         // Base URL to use in actions like `await page.goto('/')`
-        baseURL: 'http://localhost:5173',
+        // baseURL: 'http://localhost:5173',
+        baseURL: 'http://127.0.0.1:5173',
 
         // Capture trace only when a test fails for post-mortem debugging
         trace: 'on-first-retry',
@@ -52,9 +53,14 @@ export default defineConfig({
     /* Automatically spin up your local dev servers before starting tests */
     webServer: [
         {
-            command: 'npm run dev',
+            command: process.env.CI
+                ? 'npm run start'
+                : 'npm run dev',
+
             url: 'http://localhost:5173',
+
             reuseExistingServer: !process.env.CI,
+
             timeout: 60 * 1000,
         },
         {
