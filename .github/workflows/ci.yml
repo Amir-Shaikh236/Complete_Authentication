@@ -27,7 +27,7 @@ jobs:
             with:
                 node-version: 22.x
                 cache: npm
-                cache-dependency-path: backend/package-lock.json
+                cache-dependency-path: Backend/package-lock.json
             
             
           - name: Install Dependencies
@@ -88,7 +88,7 @@ jobs:
                 node-version: 22.x
                 cache: npm
                 cache-dependency-path:
-                  backend/package-lock.json
+                  Backend/package-lock.json
                   frontend/package-lock.json
             
             - name: Install Backend Dependencies
