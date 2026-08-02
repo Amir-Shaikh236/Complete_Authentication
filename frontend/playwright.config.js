@@ -7,7 +7,7 @@ import dotenv from 'dotenv'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: path.resolve(__dirname, "../backend/.env") });
+dotenv.config({ path: path.resolve(__dirname, "../Backend/.env") });
 
 export default defineConfig({
     // Point Playwright strictly to your dedicated E2E directory
@@ -54,28 +54,34 @@ export default defineConfig({
     webServer: [
         {
             command: process.env.CI
-                ? 'npm run start'
-                : 'npm run dev',
+                ? "npm run dev -- --host 0.0.0.0"
+                : "npm run dev",
 
-            url: 'http://localhost:5173',
+            cwd: path.resolve(__dirname),
+
+            url: "http://127.0.0.1:5173",
 
             reuseExistingServer: !process.env.CI,
 
             timeout: 60 * 1000,
         },
-        {
-            // Adjust this path/command if your backend sits in a separate terminal workspace
-            command: process.env.CI
-                ? 'npm run start'
-                : 'npm run dev',
 
-            url: 'http://localhost:5000',
+        {
+            command: process.env.CI
+                ? "npm run start"
+                : "npm run dev",
+
+            cwd: path.resolve(__dirname, "../Backend"),
+
+            url: "http://127.0.0.1:5000",
 
             reuseExistingServer: !process.env.CI,
+
             timeout: 60 * 1000,
+
             env: {
-                NODE_ENV: 'test',
-                PORT: '5000',
+                NODE_ENV: "test",
+                PORT: "5000",
                 MONGO_URI: process.env.MONGO_URI || "",
             },
         },
