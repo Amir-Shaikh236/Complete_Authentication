@@ -16,7 +16,7 @@ jobs:
         
         defaults:
             run:
-                working-directory: backend
+                working-directory: Backend
             
         steps:
           - name: Checkout Repository
@@ -92,7 +92,7 @@ jobs:
                   frontend/package-lock.json
             
             - name: Install Backend Dependencies
-              working-directory: backend
+              working-directory: Backend
               run: npm ci
             
             #frontend
